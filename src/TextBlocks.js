@@ -2,6 +2,14 @@ export const menu = {
     title: "Weather For",
     favTitle: "Favourite"
 }
+export const favorite={
+    backHome:"Back To Home Page",
+    noFav:"None",
+    mainTitle:"Favourites"
+}
+export const weather={
+    noData:"No Data",
+}
 export const home = {
     defaultCity: {
         Key: "215854",
@@ -16,5 +24,6 @@ export const home = {
             ID: "TA",
             LocalizedName: "Tel Aviv"
         }
-    }
+    },
+
 };

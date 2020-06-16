@@ -3,7 +3,7 @@ import DayTitle from "./DayTitle";
 import DayInfo from "./DayInfo";
 
 const WeatherContainerCol = ({data, index}) => {
-    const date=new Date(data.date);
+    const date=new Date(data.Date);
     const dayNum = date.getDay();
     const day = days[dayNum < days.length && dayNum > 0 ? dayNum : 0];
     return (

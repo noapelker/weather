@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {debounce, throttle} from "throttle-debounce";
-import {getData} from "./Main";
+import {API_KEY, getData} from "./Main";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import {setPage} from "../actions";
 import TextField from "@material-ui/core/TextField";
 import {useDispatch} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 const SearchAuto = props => {
         const [state, setState] = useState({
@@ -25,7 +26,7 @@ const SearchAuto = props => {
 
 
         const loadURL = () => {
-            getData("locations/v1/cities/autocomplete?apikey=9AIFG56brlMAEDlSsNbJVWEpXGd3xcfe&q=" + state.search.replace(/ /g, '%20')).then(res => {
+            getData("locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + state.search.replace(/ /g, '%20')).then(res => {
                 setState({...state, data: res});
             });
         };
@@ -75,6 +76,9 @@ const SearchAuto = props => {
                     onChange={(e, newInputValue) => {
                         if (newInputValue)
                             dispatch(setPage(newInputValue))
+                        let url=window.location.href;
+                        if((url.substr(url.lastIndexOf('/') + 1))==="favourite")
+                            props.history.push("/")
                     }
                     }
                     onInputChange={e => changeQuery(e)}
@@ -87,4 +91,4 @@ const SearchAuto = props => {
     }
 ;
 
-export default SearchAuto;
+export default withRouter(SearchAuto);

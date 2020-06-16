@@ -20,7 +20,6 @@ const Home = props => {
             text: favPage ? "Remove From" : "Add To",
             imgSrc: favPage ? "fav.svg" : "unFillFav.svg"
         });
-
 // eslint-disable-next-line react-hooks/exhaustive-deps,
     }, [page]);
     const dispatch = useDispatch();
