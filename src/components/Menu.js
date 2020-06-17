@@ -8,14 +8,14 @@ const Menu = props => {
     return (
         <div className={'menuContainer'}>
             <div className={'subMenu'}>
-                <span className={'menuTitle'}>{menu.title}</span>
-                <SearchAuto onClickSearch={val=>props.onClickSearch}/>
+                <h1 className={'menuTitle'}>{menu.title}</h1>
+                <SearchAuto onClickSearch={val => props.onClickSearch}/>
             </div>
             <div className={'favButtonContainer'}
                  onClick={_ =>
-                    props.history.push("/favourite")
+                     props.history.push("/favourite")
                  }>
-                <img alt={''} src={'../../photos/fav.svg'} className={'favIcon'}/>
+                <img alt={'Favorite'} src={'../../photos/fav.svg'} className={'favIcon'}/>
                 <span className={'favTitle'}>{menu.favTitle}
                 </span>
             </div>

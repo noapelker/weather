@@ -13,7 +13,8 @@ const Home = props => {
         imgSrc: "unFillFav.svg"
     });
     useEffect(() => {
-        const favPage = favor.findIndex(f => f.Key === page.Key) !== -1;
+
+        const favPage = favor.map(item => item.Key).indexOf(page.Key) !== -1;
         setFav({
             ...fav,
             isFav: favPage,
@@ -35,12 +36,12 @@ const Home = props => {
     };
     return (
         <div className={'homeContainer'}>
-            <img alt={''} src={"../../photos/city.jpeg"} className={'backImage'}/>
+            <img alt={'Background'} src={"../../photos/city.jpeg"} className={'backImage'}/>
             <div className={'mainTitle'}>
-                <span className={'cityTitle'}>{page.LocalizedName}</span>
+                <h1 className={'cityTitle'}>{page.LocalizedName}</h1>
                 <div className={'addToFavContainer'}>
                     <span>{fav.text} Favourite</span>
-                    <img alt={''} src={"../../photos/" + fav.imgSrc} className={'addToFav'}
+                    <img alt={'AddToFavourite'} src={"../../photos/" + fav.imgSrc} className={'addToFav'}
                          onClick={clickOnFav}/>
                 </div>
             </div>

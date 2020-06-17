@@ -4,7 +4,7 @@ const DayTitle = ({title,date}) => {
     return (
         <div className={'titleCol'}>
             <span className={"titleTextCol"}>{title}</span>
-            <span className={"dateCol"}>{(date).getDate()}/{date.getMonth()+1}</span>
+            <span className={"dateCol"}>{date.getDate()}/{date.getMonth()+1}</span>
         </div>
     );
 };

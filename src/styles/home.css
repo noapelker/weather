@@ -14,7 +14,7 @@
 }
 
 .cityTitle {
-    font-size: 80px;
+    font-size: 4rem;
     color: rgb(30, 32, 44);
 }
 
@@ -32,7 +32,7 @@
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 1rem;
 }
 .backImage {
     position: absolute;

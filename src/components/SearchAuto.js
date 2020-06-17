@@ -2,63 +2,65 @@ import React, {useEffect, useState} from 'react';
 import {debounce, throttle} from "throttle-debounce";
 import {API_KEY, getData} from "./Main";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import {setPage} from "../actions";
+import {addSearch, setPage} from "../actions";
 import TextField from "@material-ui/core/TextField";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {withRouter} from "react-router-dom";
 
+const DEBOUNCE_DUR = 200
+const THROTTLE_DUR = 300
+
 const SearchAuto = props => {
-        const [state, setState] = useState({
+    const searches = useSelector(state => state.searches);
+    const [data, setData] = useState({
             search: "",
-            data: [],
+            data: searches,
             text: '',
         });
 
         const dispatch = useDispatch();
-        const autocompleteSearchDebounced = (func) => {
+        const autocompleteSearchDebounced = func => {
 
-            debounce(200, func())
+            debounce(DEBOUNCE_DUR, func())
         };
 
         const autocompleteSearchThrottled = (func) => {
-            throttle(300, func())
+            throttle(THROTTLE_DUR, func())
         };
 
 
         const loadURL = () => {
-            getData("locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + state.search.replace(/ /g, '%20')).then(res => {
-                setState({...state, data: res});
+            const url = "locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + data.search;
+            getData(encodeURI(url)).then(res => {
+                setData({...data, data: res});
             });
         };
         const autocompleteSearch = q => {
-            _fetch(q);
+            const _searches = data._searches || [];
+            _searches.push(q);
+            setData({...data, _searches});
+            loadURL();
         };
         const changeQuery = event => {
             if (event.target.innerHTML) {
-                setState({...state, data: event.target.innerHTML});
+                setData({...data, data: event.target.innerHTML});
             } else {
-                setState({...state, search: event.target.value});
+                setData({...data, search: event.target.value});
             }
         };
 
         useEffect(() => {
-            if (state.search !== "") {
-                const q = state.search;
+            if (data.search !== "") {
+                const q = data.search||"";
                 if (q.length < 5) {
                     autocompleteSearchThrottled(autocompleteSearch);
                 } else {
                     autocompleteSearchDebounced(autocompleteSearch);
                 }
             }
+            console.log(data)
             // eslint-disable-next-line react-hooks/exhaustive-deps,
-        }, [state.search]);
-        const _fetch = q => {
-            const _searches = state._searches || [];
-            _searches.push(q);
-            setState({...state, _searches});
-            loadURL();
-
-        };
+        }, [data.search]);
 
 
         return (
@@ -71,16 +73,19 @@ const SearchAuto = props => {
                         margin: 0,
                         color: 'white',
                     }}
-                    options={Array.isArray(state.data) ? (state.data.map(option => option)) : []}
+                    options={(data.search===undefined||data.search==="")?searches:(Array.isArray(data.data) ? data.data : [])}
                     getOptionLabel={(option) => option.LocalizedName}
                     onChange={(e, newInputValue) => {
-                        if (newInputValue)
+                        if (newInputValue) {
+                            dispatch(addSearch(newInputValue))
                             dispatch(setPage(newInputValue))
-                        let url=window.location.href;
-                        if((url.substr(url.lastIndexOf('/') + 1))==="favourite")
+                        }
+                        let url = window.location.href;
+                        if ((url.substr(url.lastIndexOf('/') + 1)) === "favourite")
                             props.history.push("/")
                     }
                     }
+                    disableClearable
                     onInputChange={e => changeQuery(e)}
                     renderInput={params => (
                         <TextField {...params} style={{width: '100%', color: "white"}}

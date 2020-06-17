@@ -5,7 +5,7 @@ import Menu from "./Menu";
 import "../styles/menu.css"
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
-export const API_KEY = "8sRZvnuFJ6KYz7tsg2gkA6AgIOEiT9YG"
+export const API_KEY = "jUwmmOIyFUyKJwzDPXp4T83vHrxpZWPW"
 const dataURL = "https://dataservice.accuweather.com";
 export const URL = "http://localhost:3000";
 export const getData = (endpoint) =>
@@ -15,7 +15,7 @@ export const getData = (endpoint) =>
             method: "GET"
         }).then(data => data.json()).then(data => {
         return data
-    }).catch(err => console.log(endpoint)
+    }).catch(err => console.error(err)
     );
 const Main = _ => {
     return (
