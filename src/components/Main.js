@@ -4,8 +4,7 @@ import Favourite from "./Favourite";
 import Menu from "./Menu";
 import "../styles/menu.css"
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-
-export const API_KEY = "jUwmmOIyFUyKJwzDPXp4T83vHrxpZWPW"
+export const API_KEY = "YZUgFfi057xg0tAhLnIJ0ItbVMmcwbTg"
 const dataURL = "https://dataservice.accuweather.com";
 export const URL = "http://localhost:3000";
 export const getData = (endpoint) =>

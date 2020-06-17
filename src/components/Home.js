@@ -13,7 +13,6 @@ const Home = props => {
         imgSrc: "unFillFav.svg"
     });
     useEffect(() => {
-
         const favPage = favor.map(item => item.Key).indexOf(page.Key) !== -1;
         setFav({
             ...fav,
@@ -35,7 +34,9 @@ const Home = props => {
         });
     };
     return (
+
         <div className={'homeContainer'}>
+            {console.log(props.location.search.substring())}
             <img alt={'Background'} src={"../../photos/city.jpeg"} className={'backImage'}/>
             <div className={'mainTitle'}>
                 <h1 className={'cityTitle'}>{page.LocalizedName}</h1>
