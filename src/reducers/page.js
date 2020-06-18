@@ -1,11 +1,10 @@
-import {home} from "../TextBlocks";
+const pageReducer = (state=[], action) => {
+        switch (action.type) {
+            case "SET_PAGE":
+                return action.payload;
+            default:
+                return state;
+        }
 
-const pageReducer = (state=home.defaultCity,action) => {
-    switch (action.type) {
-        case "SET_PAGE":
-          return action.payload;
-        default:
-            return state;
-    }
 };
 export default pageReducer;

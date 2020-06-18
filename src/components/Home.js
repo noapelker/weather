@@ -38,10 +38,12 @@ const Home = _ => {
         <div className={'homeContainer'}>
             <img alt={'Background'} src={"../../photos/city.jpeg"} className={'backImage'}/>
             <div className={'mainTitle'}>
+                {console.log(page)}
                 <h1 className={'cityTitle'}>{page.LocalizedName}</h1>
                 <div className={'addToFavContainer'}>
                     <span>{fav.text} Favourite</span>
-                    <img alt={'AddToFavourite'} src={"../../photos/" + fav.imgSrc} className={'addToFav'}
+                    <img alt={'AddToFavourite'} src={"../../photos/" + fav.imgSrc}
+                         className={'addToFav'}
                          onClick={clickOnFav}/>
                 </div>
             </div>

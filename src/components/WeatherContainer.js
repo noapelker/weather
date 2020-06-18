@@ -7,6 +7,7 @@ import {weather} from "../TextBlocks";
 const WeatherContainer = ({keyValue}) => {
     const [data, setData] = useState(undefined);
     useEffect(() => {
+        if (keyValue)
         getData("/forecasts/v1/daily/5day/" + keyValue + "?apikey=" + API_KEY).then(data => {
             setData(data)
         })

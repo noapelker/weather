@@ -8,7 +8,7 @@ export const favorite={
     mainTitle:"Favourites"
 }
 export const weather={
-    noData:"No Data",
+    noData:"Loading...",
 }
 export const home = {
     defaultCity: {
