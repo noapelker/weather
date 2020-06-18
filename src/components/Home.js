@@ -4,7 +4,7 @@ import "../styles/home.css"
 import WeatherContainer from "./WeatherContainer";
 import {add, remove} from "../actions";
 
-const Home = props => {
+const Home = _ => {
     const page = useSelector(state => state.page);
     const favor = useSelector(state => state.favourite);
     const [fav, setFav] = useState({
@@ -36,7 +36,6 @@ const Home = props => {
     return (
 
         <div className={'homeContainer'}>
-            {console.log(props.location.search.substring())}
             <img alt={'Background'} src={"../../photos/city.jpeg"} className={'backImage'}/>
             <div className={'mainTitle'}>
                 <h1 className={'cityTitle'}>{page.LocalizedName}</h1>

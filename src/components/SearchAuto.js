@@ -11,8 +11,8 @@ const DEBOUNCE_DUR = 200
 const THROTTLE_DUR = 300
 
 const SearchAuto = props => {
-    const searches = useSelector(state => state.searches);
-    const [data, setData] = useState({
+        const searches = useSelector(state => state.searches);
+        const [data, setData] = useState({
             search: "",
             data: searches,
             text: '',
@@ -51,14 +51,13 @@ const SearchAuto = props => {
 
         useEffect(() => {
             if (data.search !== "") {
-                const q = data.search||"";
+                const q = data.search || "";
                 if (q.length < 5) {
                     autocompleteSearchThrottled(autocompleteSearch);
                 } else {
                     autocompleteSearchDebounced(autocompleteSearch);
                 }
             }
-            console.log(data)
             // eslint-disable-next-line react-hooks/exhaustive-deps,
         }, [data.search]);
 
@@ -73,7 +72,7 @@ const SearchAuto = props => {
                         margin: 0,
                         color: 'white',
                     }}
-                    options={(data.search===undefined||data.search==="")?searches:(Array.isArray(data.data) ? data.data : [])}
+                    options={(data.search === undefined || data.search === "") ? searches : (Array.isArray(data.data) ? data.data : [])}
                     getOptionLabel={(option) => option.LocalizedName}
                     onChange={(e, newInputValue) => {
                         if (newInputValue) {
