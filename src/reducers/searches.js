@@ -1,3 +1,4 @@
+//Handle recent searches
 const searchReducer = (state = [], action) => {
     switch (action.type) {
         case "ADD_SEARCH":

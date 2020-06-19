@@ -22,4 +22,10 @@ export const addSearch = value => {
         payload: value
     }
 };
+export const setMode = value => {
+    return {
+        type: "SET_MODE",
+        payload:value
+    }
+};
 

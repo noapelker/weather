@@ -1,7 +1,6 @@
 .weatherContainer {
     width: 90%;
-    height: 60%;
-    background-color: rgba(30, 32, 44, 0.8);
+    height: 50%;
     display: flex;
     z-index: 1;
 }
@@ -13,7 +12,18 @@
     flex: 1;
     justify-content: space-between;
 }
-.noData{
+
+.dark-mode-title {
+    background-color: rgb(30, 32, 44);
+    color: white;
+}
+
+.light-mode-title {
+    background-color: #ffffffbf;
+    color: rgb(30, 32, 44);
+}
+
+.noData {
     color: white;
     width: 100%;
     text-align: center;
@@ -22,12 +32,12 @@
     justify-content: center;
     align-items: center;
 }
+
 .tempContainer {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    height: 70%;
-    color: white;
+    justify-content: center;
+    flex: 1;
 }
 
 .weatherCol {
@@ -49,8 +59,6 @@
     height: fit-content;
     text-align: center;
     width: 100%;
-    background-color: rgb(30, 32, 44);
-    color: white;
 }
 
 .weatherColSub {
@@ -83,8 +91,25 @@
 
 .iconPhrase {
     width: 100%;
-    max-height: 20%;
     font-size: 1.5rem;
     text-align: center;
-    color: white;
+}
+
+@media only screen and (max-width: 950px) {
+    .tempText, .iconPhrase, .tempTextSub {
+        font-size: 1rem;
+    }
+
+    .dateCol {
+        font-size: 0.8rem;
+    }
+
+    .weatherContainer {
+        height: 100vh;
+        flex-direction: column;
+    }
+    .weatherCol, .weatherColLast{
+        width: 100%;
+    }
+
 }

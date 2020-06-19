@@ -1,3 +1,4 @@
+//General text holder
 export const menu = {
     title: "Weather For",
     favTitle: "Favourite"
@@ -9,6 +10,7 @@ export const favorite={
 }
 export const weather={
     noData:"Loading...",
+    tempUnit:"º c"
 }
 export const home = {
     defaultCity: {

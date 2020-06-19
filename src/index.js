@@ -15,13 +15,13 @@ store.subscribe(() => {
     saveToLocalStorage({
         favourite: store.getState().favourite,
         searches: store.getState().searches,
+        themeMode:store.getState().themeMode
     });
 });
 
 ReactDOM.render(
     <Provider store={store}>
         <App/>
-
     </Provider>,
     document.getElementById('root')
 );

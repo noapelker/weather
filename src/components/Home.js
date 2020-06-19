@@ -1,27 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import "../styles/home.css"
 import WeatherContainer from "./WeatherContainer";
 import {add, remove} from "../actions";
+import {API_KEY, getData} from "./Main";
+import {weather} from "../TextBlocks";
 
 const Home = _ => {
     const page = useSelector(state => state.page);
+    const darkMode = useSelector(state => state.themeMode);
     const favor = useSelector(state => state.favourite);
+    const [temp, setTemp] = useState(0);
     const [fav, setFav] = useState({
         isFav: favor.indexOf(page.Key) !== -1,
         text: "Add To",
         imgSrc: "unFillFav.svg"
     });
+
     useEffect(() => {
         const favPage = favor.map(item => item.Key).indexOf(page.Key) !== -1;
         setFav({
-            ...fav,
             isFav: favPage,
             text: favPage ? "Remove From" : "Add To",
             imgSrc: favPage ? "fav.svg" : "unFillFav.svg"
         });
-// eslint-disable-next-line react-hooks/exhaustive-deps,
-    }, [page]);
+        if (page && !Array.isArray(page)) {
+            //Get current weather
+            getData("/currentconditions/v1/" + page.Key + "?apikey=" + API_KEY
+            ).then(data => {
+                setTemp(data[0].Temperature.Metric.Value)
+            }).catch(_ => console.log("API HAS BEEN BLOCK"));
+        }
+        }, [page]);
     const dispatch = useDispatch();
 
     const clickOnFav = _ => {
@@ -37,15 +47,17 @@ const Home = _ => {
 
         <div className={'homeContainer'}>
             <img alt={'Background'} src={"../../photos/city.jpeg"} className={'backImage'}/>
-            <div className={'mainTitle'}>
-                {console.log(page)}
-                <h1 className={'cityTitle'}>{page.LocalizedName}</h1>
-                <div className={'addToFavContainer'}>
-                    <span>{fav.text} Favourite</span>
-                    <img alt={'AddToFavourite'} src={"../../photos/" + fav.imgSrc}
-                         className={'addToFav'}
-                         onClick={clickOnFav}/>
+            <div className={'textsContainer'}>
+                <div className={'mainTitle'}>
+                    <h1 className={'cityTitle'}>{page.LocalizedName}</h1>
+                    <div className={'addToFavContainer'}>
+                        <span>{fav.text} Favourite</span>
+                        <img alt={'AddToFavourite'} src={"../../photos/" + fav.imgSrc}
+                             className={'addToFav ' + (darkMode ? "imgDark" : "imgLight")}
+                             onClick={clickOnFav}/>
+                    </div>
                 </div>
+                <h2 className={'tempTitle'}>{temp && temp} {weather.tempUnit}</h2>
             </div>
             <WeatherContainer keyValue={page.Key}/>
         </div>

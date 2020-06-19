@@ -6,20 +6,25 @@ import {favorite} from "../TextBlocks";
 
 const Favourite = props => {
     const favourite = useSelector(state => state.favourite);
+    const darkMode = useSelector(state => state.themeMode);
     return (
         <div className={'favouriteContainer'}>
             <h1 className={'favMainTitle'}>{favorite.mainTitle}</h1>
-            <img alt={'Background'} src={"../../photos/city.jpeg"} className={'backImage'}/>
+            <img alt={'Background'} src={"../../photos/city.jpeg"}
+                 className={'backImage favImage'}/>
             <div className={'favItemContainer'}>
-                {favourite && favourite.length > 0 ?
-                    favourite.map((item, key) => <Fav key={key} data={item}/>) :
-                    <div className={'noDataContainer'}>
-                        <span className={'favouriteTitle'}>{favorite.noFav}</span>
-                    </div>}
-
+                {
+                    //Check for favorite selection
+                    favourite && favourite.length > 0 ?
+                        favourite.map((item, key) => <Fav key={key} data={item}
+                                                          darkMode={darkMode}/>) :
+                        <div className={'noDataContainer'}>
+                            <span className={'favouriteTitle'}>{favorite.noFav}</span>
+                        </div>}
             </div>
-            <button className={'backToHome'} onClick={_ => props.history.push('/')
-            }>{favorite.backHome}
+            <button className={'backToHome ' + (darkMode ? "unit-dark-mode" : "unit-light-mode")}
+                    onClick={_ => props.history.push('/')
+                    }>{favorite.backHome}
             </button>
         </div>
     );

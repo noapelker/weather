@@ -8,8 +8,9 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {home} from "../TextBlocks";
 
-export const API_KEY = "fnWjNXbqgBZPU4hZTHukJR7c7uxVAy1V"
+export const API_KEY = "21AG9MDZAv3q5t2PhHeoFWsm5MDaPyMJ"
 const dataURL = "https://dataservice.accuweather.com";
+
 export const getData = (endpoint) =>
     fetch(dataURL + '/' + endpoint
         , {
@@ -21,9 +22,11 @@ export const getData = (endpoint) =>
 
 const Main = _ => {
     const dispatch = useDispatch();
+
+    //Geolocation
     useEffect(() => {
         if (navigator.geolocation)
-            navigator.geolocation.getCurrentPosition(function (position) {
+            navigator.geolocation.getCurrentPosition(position=> {
                 fetch("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=" + API_KEY + "&q=" + position.coords.latitude + "%2C" + position.coords.longitude, {
                     method: "GET"
                 }).then(data => data.json()).then(data => {
@@ -34,7 +37,9 @@ const Main = _ => {
                     });
                 }).catch(err => console.error(err)
                 );
-            }, function (err) {
+            }, _=> {
+
+                //Set to Tel Aviv by default
                 dispatch(setPage(home.defaultCity));
             })
         else console.log("not support")

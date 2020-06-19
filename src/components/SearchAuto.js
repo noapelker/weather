@@ -12,13 +12,14 @@ const THROTTLE_DUR = 300
 
 const SearchAuto = props => {
         const searches = useSelector(state => state.searches);
+        const darkTheme = useSelector(state => state.themeMode);
         const [data, setData] = useState({
             search: "",
             data: searches,
             text: '',
         });
-
         const dispatch = useDispatch();
+
         const autocompleteSearchDebounced = func => {
 
             debounce(DEBOUNCE_DUR, func())
@@ -28,13 +29,15 @@ const SearchAuto = props => {
             throttle(THROTTLE_DUR, func())
         };
 
-
+        //Fetch according to search changes
         const loadURL = () => {
             const url = "locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + data.search;
             getData(encodeURI(url)).then(res => {
                 setData({...data, data: res});
             });
         };
+
+        //Insert
         const autocompleteSearch = q => {
             const _searches = data._searches || [];
             _searches.push(q);
@@ -63,14 +66,17 @@ const SearchAuto = props => {
 
 
         return (
-            <div className={'searchContainer'}>
+            <div className={'searchContainer'} style={{color: "black"}}>
+
                 <Autocomplete
-                    id="combo-box-demo"
                     freeSolo
                     style={{
                         flex: 1,
                         margin: 0,
-                        color: 'white',
+                    }}
+                    classes={{
+                        inputRoot: darkTheme ? "blackSearch" : "lightSearch",
+                        listbox: (data.search === undefined || data.search === "") ? "searches" : ""
                     }}
                     options={(data.search === undefined || data.search === "") ? searches : (Array.isArray(data.data) ? data.data : [])}
                     getOptionLabel={(option) => option.LocalizedName}
@@ -87,7 +93,7 @@ const SearchAuto = props => {
                     disableClearable
                     onInputChange={e => changeQuery(e)}
                     renderInput={params => (
-                        <TextField {...params} style={{width: '100%', color: "white"}}
+                        <TextField {...params} className={"menuBlack"} style={{width: '100%'}}
                                    label="Search" margin="normal" variant="outlined"
                         />)}/>
             </div>

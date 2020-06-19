@@ -1,17 +1,82 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-h1{
-  font-weight: unset;
+
+h1 {
+    font-weight: unset;
+}
+/*Dark mode*/
+.dark-mode {
+    background-color: rgba(30, 32, 44, 0.4) !important;
+    color: white !important;
+}
+
+.full-dark-mode {
+    background-color: rgb(30, 32, 44);
+    color: white;
+}
+
+.unit-dark-mode {
+    background-color: rgba(30, 32, 44, 0.6);
+    color: white;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+    background-color: rgba(30, 32, 44, 0.8);
+
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background-color: rgb(30, 32, 44);
+    border-radius: 20px;
+}
+
+.dark-mode ::-webkit-scrollbar, .light-mode ::-webkit-scrollbar {
+    width: 1em;
+    height: 0.8em;
+    border-radius: 20px;
+}
+
+.imgDark {
+    filter: invert(100%) sepia(0%) saturate(3278%) hue-rotate(162deg) brightness(115%) contrast(110%);
+}
+
+/*Light mode*/
+
+.imgLight {
+    filter: invert(11%) sepia(7%) saturate(1944%) hue-rotate(194deg) brightness(95%) contrast(95%);
+}
+
+.light-mode ::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.light-mode ::-webkit-scrollbar-thumb {
+    background-color: rgb(154, 154, 154);
+    border-radius: 20px;
+}
+
+.unit-light-mode {
+    background-color: rgba(240, 240, 240, 0.4);
+    color: rgb(30, 32, 44);
+}
+
+.full-light-mode {
+    background-color: white;
+    color: rgb(30, 32, 44);
+}
+
+.light-mode {
+    background-color: rgba(240, 240, 240, 0.3) !important;
+    color: rgb(30, 32, 44) !important;
 }

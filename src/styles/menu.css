@@ -1,15 +1,21 @@
 .menuContainer {
     width: calc(100% - 16px);
     height: 70px;
-    background-color: rgb(30, 32, 44);
     padding: 8px;
     display: flex;
     align-items: center;
+
 }
 
-.MuiFormLabel-root, .MuiIconButton-root, .MuiInputBase-root {
-    color: white !important;
+.lightSearch {
+    color: rgb(30, 32, 44);
+    border: 1px solid rgb(30, 32, 44);
 
+}
+
+.blackSearch {
+    color: white !important;
+    border: 1px solid white;
 }
 
 .MuiOutlinedInput-notchedOutline {
@@ -27,14 +33,15 @@
     align-items: center;
     position: absolute;
     right: 20px;
+    width: 10%;
     cursor: pointer;
 }
-.favButtonContainer:hover{
+
+.favButtonContainer:hover {
     opacity: 0.8;
 }
 
 .favTitle {
-    color: white;
     font-size: 1rem;
 }
 
@@ -50,16 +57,58 @@
 }
 
 .menuTitle {
-    color: white;
     text-align: right;
     font-size: 1.8rem;
     padding-right: 20px;
 
 }
 
+.searches {
+    color: #52188c;
+}
+
 .subMenu {
-    width: calc(100% - 20px);
+    width: calc(80% - 20px);
     align-items: center;
     display: flex;
     justify-content: center;
 }
+
+.darkWrite {
+    color: white;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+    transform: translate(14px, -12px) scale(0.75) !important;
+}
+
+.MuiInputLabel-outlined {
+    color: #585757 !important;
+
+}
+
+@media only screen and (max-width: 950px) {
+    .menuTitle {
+        font-size: 0;
+    }
+
+    .subMenu {
+        position: absolute;
+        top: 80px;
+        width: 90%;
+    }
+
+    .searchContainer {
+        flex: 1;
+    }
+
+    .favButtonContainer {
+        min-width: 20%;
+        width: fit-content;
+    }
+
+    h1, h2 {
+        margin: 0;
+    }
+}
+
