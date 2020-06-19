@@ -48,7 +48,7 @@ const Home = _ => {
     return (
 
         <div className={'homeContainer'}>
-            <img alt={'Background'} src={"../../photos/city.jpeg"} className={'backImage'}/>
+            <img alt={'Background'} src={"../../photos/city.png"} className={'backImage'}/>
             <div className={'textsContainer'}>
                 <div className={'mainTitle'}>
                     <h1 className={'cityTitle'}>{page.LocalizedName}</h1>
