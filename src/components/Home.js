@@ -1,22 +1,23 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import "../styles/home.css"
 import WeatherContainer from "./WeatherContainer";
 import {add, remove} from "../actions";
-import {API_KEY, getData} from "./Main";
-import {weather} from "../TextBlocks";
+import {API_KEY, getData} from "../Utils";
+import {errors, weather} from "../TextBlocks";
+import {useToasts} from "react-toast-notifications";
 
 const Home = _ => {
     const page = useSelector(state => state.page);
     const darkMode = useSelector(state => state.themeMode);
     const favor = useSelector(state => state.favourite);
+    const {addToast} = useToasts()
     const [temp, setTemp] = useState(0);
     const [fav, setFav] = useState({
         isFav: favor.indexOf(page.Key) !== -1,
         text: "Add To",
         imgSrc: "unFillFav.svg"
     });
-
     useEffect(() => {
         const favPage = favor.map(item => item.Key).indexOf(page.Key) !== -1;
         setFav({
@@ -24,14 +25,15 @@ const Home = _ => {
             text: favPage ? "Remove From" : "Add To",
             imgSrc: favPage ? "fav.svg" : "unFillFav.svg"
         });
+    }, [page, favor])
+    useEffect(() => {
         if (page && !Array.isArray(page)) {
             //Get current weather
-            getData("/currentconditions/v1/" + page.Key + "?apikey=" + API_KEY
-            ).then(data => {
+            getData("/currentconditions/v1/" + page.Key + "?apikey=" + API_KEY).then(data => {
                 setTemp(data[0].Temperature.Metric.Value)
-            }).catch(_ => console.log("API HAS BEEN BLOCK"));
+            }).catch(_ => addToast(errors.failFetch, {appearance: "error"}));
         }
-        }, [page]);
+    }, [page,addToast]);
     const dispatch = useDispatch();
 
     const clickOnFav = _ => {

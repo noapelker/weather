@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import allReducer from './reducers'
-import {loadFromLocalStorage, saveToLocalStorage} from "./api";
+import {loadFromLocalStorage, saveToLocalStorage} from "./Utils";
 
 const persistedState = loadFromLocalStorage();
 const store = createStore(allReducer, persistedState);

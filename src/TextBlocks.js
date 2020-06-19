@@ -3,14 +3,17 @@ export const menu = {
     title: "Weather For",
     favTitle: "Favourite"
 }
-export const favorite={
-    backHome:"Back To Home Page",
-    noFav:"None",
-    mainTitle:"Favourites"
+export const favorite = {
+    backHome: "Back To Home Page",
+    noFav: "None",
+    mainTitle: "Favourites"
 }
-export const weather={
-    noData:"Loading...",
-    tempUnit:"º c"
+export const errors = {
+    failFetch: 'Fail fetching data. \n Please check your Internet connection  ',
+}
+export const weather = {
+    noData: "Loading...",
+    tempUnit: "º c"
 }
 export const home = {
     defaultCity: {
@@ -29,3 +32,4 @@ export const home = {
     },
 
 };
+export const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

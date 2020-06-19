@@ -5,6 +5,7 @@ export const saveToLocalStorage = (state) => {
     } catch {
     }
 };
+
 export const loadFromLocalStorage = () => {
     try {
         const serializedState = localStorage.getItem('state');
@@ -16,3 +17,20 @@ export const loadFromLocalStorage = () => {
         return undefined;
     }
 };
+
+export const convertTemperature = val => {
+    return Math.round((val - 32) * (5 / 9));
+}
+
+export const API_KEY = "UsrZvPwtSwuwBiIcGXy2SIacQ4IanDO1";
+
+const dataURL = "https://dataservice.accuweather.com";
+
+export const getData = (endpoint) =>
+    fetch(dataURL + '/' + endpoint
+        , {
+            method: "GET"
+        }).then(data => data.json()).then(data => {
+            return data
+        }
+    );

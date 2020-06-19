@@ -1,14 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import {debounce, throttle} from "throttle-debounce";
-import {API_KEY, getData} from "./Main";
+import {API_KEY, getData} from "../Utils";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import {addSearch, setPage} from "../actions";
 import TextField from "@material-ui/core/TextField";
 import {useDispatch, useSelector} from "react-redux";
 import {withRouter} from "react-router-dom";
+import {useToasts} from "react-toast-notifications";
+import {errors} from "../TextBlocks";
 
-const DEBOUNCE_DUR = 200
-const THROTTLE_DUR = 300
+const DEBOUNCE_DUR = 600
+const THROTTLE_DUR = 500
+const getAutoSearch = (query, callback,errnCallBack) => {
+    const url = "locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + query;
+    getData(encodeURI(url)).then(res => {
+        callback(data => ({...data, data: res}));
+    }).catch(_ => {
+        console.log()
+        errnCallBack(errors.failFetch,{appearance:"error"})
+    });
+};
+const throttleFunc = throttle(THROTTLE_DUR, getAutoSearch)
+const debounceFunc = debounce(DEBOUNCE_DUR, getAutoSearch)
 
 const SearchAuto = props => {
         const searches = useSelector(state => state.searches);
@@ -19,31 +32,7 @@ const SearchAuto = props => {
             text: '',
         });
         const dispatch = useDispatch();
-
-        const autocompleteSearchDebounced = func => {
-
-            debounce(DEBOUNCE_DUR, func())
-        };
-
-        const autocompleteSearchThrottled = (func) => {
-            throttle(THROTTLE_DUR, func())
-        };
-
-        //Fetch according to search changes
-        const loadURL = () => {
-            const url = "locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + data.search;
-            getData(encodeURI(url)).then(res => {
-                setData({...data, data: res});
-            });
-        };
-
-        //Insert
-        const autocompleteSearch = q => {
-            const _searches = data._searches || [];
-            _searches.push(q);
-            setData({...data, _searches});
-            loadURL();
-        };
+        const {addToast} = useToasts();
         const changeQuery = event => {
             if (event.target.innerHTML) {
                 setData({...data, data: event.target.innerHTML});
@@ -53,16 +42,15 @@ const SearchAuto = props => {
         };
 
         useEffect(() => {
+            //Fetch according to search changes
             if (data.search !== "") {
                 const q = data.search || "";
-                if (q.length < 5) {
-                    autocompleteSearchThrottled(autocompleteSearch);
-                } else {
-                    autocompleteSearchDebounced(autocompleteSearch);
-                }
+                if (q.length < 5)
+                    throttleFunc(q, setData,addToast);
+                else
+                    debounceFunc(q, setData,addToast);
             }
-            // eslint-disable-next-line react-hooks/exhaustive-deps,
-        }, [data.search]);
+        }, [data.search,addToast]);
 
 
         return (

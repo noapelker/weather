@@ -1,10 +1,8 @@
 import React from 'react';
 import {weather} from "../TextBlocks";
+import {convertTemperature} from "../Utils";
 
 const InfoUnit = ({data}) => {
-    const convertTemperature = val => {
-        return Math.round((val - 32) * (5 / 9));
-    }
     const temp = data && data.Temperature ? data.Temperature.Imperial : "Unknown";
     return (
         <div className={'infoUnit'}>
