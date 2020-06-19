@@ -11,7 +11,7 @@ const ModeContainer = _ => {
             <img alt={'light'} src={'../photos/lightMode.svg'}
                  className={'modeImg ' + (darkMode ? "imgDark" : "imgLight")}/>
             <label className="switch">
-                <input type="checkbox" onClick={_ => {
+                <input type="checkbox" defaultChecked={darkMode} onClick={_ => {
 
                     //Change theme mode
                     dispatch(setMode())

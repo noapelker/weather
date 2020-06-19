@@ -22,7 +22,7 @@ export const convertTemperature = val => {
     return Math.round((val - 32) * (5 / 9));
 }
 
-export const API_KEY = "UsrZvPwtSwuwBiIcGXy2SIacQ4IanDO1";
+export const API_KEY = "1TE4I4csgT8j5BRdBvv2MEV0KXYHpzmL";
 
 const dataURL = "https://dataservice.accuweather.com";
 

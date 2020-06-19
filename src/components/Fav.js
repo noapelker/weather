@@ -17,7 +17,7 @@ const Fav = ({history, data, darkMode}) => {
             if (data)
                 setState(data[0]);
         }).catch(_ => addToast(errors.failFetch, {appearance: 'error'}))
-    }, [data.Key,addToast]);
+    }, [data.Key, addToast]);
     return (
         <div className={'favUnitContainer ' + (darkMode ? "unit-dark-mode" : "unit-light-mode")}
              onClick={_ => {

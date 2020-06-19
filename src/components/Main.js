@@ -6,7 +6,7 @@ import "../styles/menu.css"
 import {setPage} from "../actions"
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {home} from "../TextBlocks";
+import {errors, home} from "../TextBlocks";
 import {useToasts } from 'react-toast-notifications'
 import {API_KEY, getData} from "../Utils";
 
@@ -26,7 +26,7 @@ const Main = _ => {
                         if (res)
                             dispatch(setPage(res[0]))
                     });
-                }).catch(_ => addToast('Saved Successfully', {appearance: 'success'})
+                }).catch(_ => addToast(errors.failFetch, {appearance: 'error'})
                 );
             }, _ => {
 

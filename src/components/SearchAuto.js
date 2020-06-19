@@ -7,7 +7,6 @@ import TextField from "@material-ui/core/TextField";
 import {useDispatch, useSelector} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {useToasts} from "react-toast-notifications";
-import {errors} from "../TextBlocks";
 
 const DEBOUNCE_DUR = 600
 const THROTTLE_DUR = 500
@@ -15,10 +14,7 @@ const getAutoSearch = (query, callback,errnCallBack) => {
     const url = "locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + query;
     getData(encodeURI(url)).then(res => {
         callback(data => ({...data, data: res}));
-    }).catch(_ => {
-        console.log()
-        errnCallBack(errors.failFetch,{appearance:"error"})
-    });
+    }).catch(_=>{});
 };
 const throttleFunc = throttle(THROTTLE_DUR, getAutoSearch)
 const debounceFunc = debounce(DEBOUNCE_DUR, getAutoSearch)
