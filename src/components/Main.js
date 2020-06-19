@@ -18,7 +18,7 @@ const Main = _ => {
     useEffect(() => {
         if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(position => {
-                fetch("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=" + API_KEY + "&q=" + position.coords.latitude + "%2C" + position.coords.longitude, {
+                fetch("https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=" + API_KEY + "&q=" + position.coords.latitude + "%2C" + position.coords.longitude, {
                     method: "GET"
                 }).then(data => data.json()).then(data => {
                     const url = "locations/v1/cities/autocomplete?apikey=" + API_KEY + "&q=" + encodeURI(data.LocalizedName);
