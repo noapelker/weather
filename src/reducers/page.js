@@ -1,6 +1,8 @@
+import {SET_PAGE} from "../constants";
+
 const pageReducer = (state=[], action) => {
         switch (action.type) {
-            case "SET_PAGE":
+            case SET_PAGE:
                 return action.payload;
             default:
                 return state;

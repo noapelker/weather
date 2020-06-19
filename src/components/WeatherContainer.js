@@ -8,7 +8,7 @@ import {useToasts} from "react-toast-notifications";
 
 const WeatherContainer = ({keyValue}) => {
     const [data, setData] = useState(undefined);
-    const darkMode = useSelector(state => state.themeMode)
+    const darkMode = useSelector(state => state.themeMode.darkMode)
     const {addToast} = useToasts()
 
     //Get 5 days weather data

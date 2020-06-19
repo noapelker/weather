@@ -6,7 +6,7 @@ import {favorite} from "../TextBlocks";
 
 const Favourite = props => {
     const favourite = useSelector(state => state.favourite);
-    const darkMode = useSelector(state => state.themeMode);
+    const darkMode = useSelector(state => state.themeMode.darkMode);
     return (
         <div className={'favouriteContainer'}>
             <h1 className={'favMainTitle'}>{favorite.mainTitle}</h1>

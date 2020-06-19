@@ -44,7 +44,7 @@
 .backImage {
     position: absolute;
     z-index: -1;
-    opacity: 50%;
+    opacity: 0.5;
     height: calc(100vh - 86px);
     object-fit: cover;
     width: 100%;

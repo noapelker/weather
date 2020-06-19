@@ -7,7 +7,7 @@ import {days} from "../TextBlocks"
 const WeatherContainerCol = ({data, index}) => {
     const date = new Date(data.Date);
     const dayNum = date.getDay();
-    const darkMode = useSelector(state => state.themeMode)
+    const darkMode = useSelector(state => state.themeMode.darkMode)
     const day = days[dayNum < days.length && dayNum > 0 ? dayNum : 0];
     return (
         <div className={index !== 4 ? 'weatherCol' : "weatherColLast"}>

@@ -13,7 +13,6 @@ export const errors = {
 }
 export const weather = {
     noData: "Loading...",
-    tempUnit: "º c"
 }
 export const home = {
     defaultCity: {

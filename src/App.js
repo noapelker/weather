@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {ToastProvider} from 'react-toast-notifications'
 
 function App() {
-    const darkTheme = useSelector(state => state.themeMode);
+    const darkTheme = useSelector(state => state.themeMode.darkMode);
     return (
         <div className={darkTheme ? 'dark-mode' : "light-mode"}>
             <ToastProvider>

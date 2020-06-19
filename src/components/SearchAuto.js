@@ -21,7 +21,7 @@ const debounceFunc = debounce(DEBOUNCE_DUR, getAutoSearch)
 
 const SearchAuto = props => {
         const searches = useSelector(state => state.searches);
-        const darkTheme = useSelector(state => state.themeMode);
+        const darkTheme = useSelector(state => state.themeMode.darkMode);
         const [data, setData] = useState({
             search: "",
             data: searches,

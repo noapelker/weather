@@ -7,7 +7,7 @@ import ModeContainer from "./ModeContainer";
 import {useSelector} from "react-redux";
 
 const Menu = props => {
-    const darkMode = useSelector(store => store.themeMode);
+    const darkMode = useSelector(store => store.themeMode.darkMode);
     return (
         <div className={'menuContainer ' + (darkMode ? "full-dark-mode" : 'full-light-mode')}>
             <ModeContainer/>

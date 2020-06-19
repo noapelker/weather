@@ -3,13 +3,14 @@ import {useSelector, useDispatch} from 'react-redux';
 import "../styles/home.css"
 import WeatherContainer from "./WeatherContainer";
 import {add, remove} from "../actions";
-import {API_KEY, getData} from "../Utils";
-import {errors, weather} from "../TextBlocks";
+import {API_KEY, convertTemperature, getData} from "../Utils";
+import {errors} from "../TextBlocks";
 import {useToasts} from "react-toast-notifications";
 
 const Home = _ => {
     const page = useSelector(state => state.page);
-    const darkMode = useSelector(state => state.themeMode);
+    const darkMode = useSelector(state => state.themeMode.darkMode);
+    const showCelcius = useSelector(state => state.themeMode.showCelcius);
     const favor = useSelector(state => state.favourite);
     const {addToast} = useToasts()
     const [temp, setTemp] = useState(0);
@@ -30,7 +31,7 @@ const Home = _ => {
         if (page && !Array.isArray(page)) {
             //Get current weather
             getData("/currentconditions/v1/" + page.Key + "?apikey=" + API_KEY).then(data => {
-                setTemp(data[0].Temperature.Metric.Value)
+                setTemp(data[0].Temperature.Imperial.Value)
             }).catch(_ => addToast(errors.failFetch, {appearance: "error"}));
         }
     }, [page,addToast]);
@@ -59,7 +60,7 @@ const Home = _ => {
                              onClick={clickOnFav}/>
                     </div>
                 </div>
-                <h2 className={'tempTitle'}>{temp && temp} {weather.tempUnit}</h2>
+                <h2 className={'tempTitle'}>{temp && convertTemperature(temp, showCelcius)} {showCelcius ? 'ºc' : 'F'}</h2>
             </div>
             <WeatherContainer keyValue={page.Key}/>
         </div>
