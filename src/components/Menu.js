@@ -19,7 +19,7 @@ const Menu = props => {
                  onClick={_ =>
                      props.history.push("/favourite")
                  }>
-                <img alt={'Favorite'} src={'../../photos/fav.svg'}
+                <img alt={'Favorite'} src={'photos/fav.svg'}
                      className={"favIcon " + (darkMode ? "imgDark" : "imgLight")}/>
                 <span className={'favTitle'}>{menu.favTitle}
                 </span>

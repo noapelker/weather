@@ -10,7 +10,7 @@ const Favourite = props => {
     return (
         <div className={'favouriteContainer'}>
             <h1 className={'favMainTitle'}>{favorite.mainTitle}</h1>
-            <img alt={'Background'} src={"../../photos/city.jpg"}
+            <img alt={'Background'} src={"photos/city.jpg"}
                  className={'backImage favImage'}/>
             <div className={'favItemContainer'}>
                 {

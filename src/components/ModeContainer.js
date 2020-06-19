@@ -8,7 +8,7 @@ const ModeContainer = _ => {
     const darkMode = useSelector(store => store.themeMode)
     return (
         <div className={'modeContainer'}>
-            <img alt={'light'} src={'../photos/lightMode.svg'}
+            <img alt={'light'} src={'photos/lightMode.svg'}
                  className={'modeImg ' + (darkMode ? "imgDark" : "imgLight")}/>
             <label className="switch">
                 <input type="checkbox" defaultChecked={darkMode} onClick={_ => {
@@ -18,7 +18,7 @@ const ModeContainer = _ => {
                 }}/>
                 <span className="slider round sliderBack"/>
             </label>
-            <img alt={'dark'} src={'../photos/darkMode.svg'}
+            <img alt={'dark'} src={'photos/darkMode.svg'}
                  className={'modeImg ' + (darkMode ? "imgDark" : "imgLight")}/>
 
         </div>
